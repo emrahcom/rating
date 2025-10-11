@@ -36,3 +36,14 @@ ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
   -filter_complex "overlay=0:0" -y graph-0.mp4
 ffmpeg -i graph-0.mp4 -c copy -movflags faststart -y graph-1.mp4
 ```
+
+## Upload
+
+Manually clear the remote folder before uploading.
+
+```bash
+mkdir split
+cd split
+split -b 10M ../graph-1.mp4
+rsync -ave "ssh -p 22" ../split/ remote-host:/mnt/store/project-name/split/
+```
