@@ -6,7 +6,7 @@ set -e
 #   apt-get install imagemagick bc
 #
 # usage:
-#   bash graph-to-video.sh
+#   bash graph-to-video.sh <GRAPH> <X0> <X1> <Y0> <Y1> <SECONDS>
 #
 # notes:
 #   - graph is a chart prepared by LibreOffice Calc using data
