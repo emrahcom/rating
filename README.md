@@ -35,7 +35,7 @@ apt-get install imagemagick bc
 
 ```bash
 FRAMERATE=0.5
-ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y timer.mp4
+ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y /tmp/timer.mp4
 ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
   -filter_complex "overlay=0:0" -y graph-0.mp4
 ffmpeg -i graph-0.mp4 -c copy -movflags faststart -y graph-1.mp4
