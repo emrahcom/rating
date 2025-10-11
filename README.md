@@ -26,3 +26,13 @@ apt-get install imagemagick bc
 - `Y1` is the pixel coordinate for bottom point of the slider on Y axis.
 - `SECONDS` is the X axis length of the active part [`X0`, `X1`] as seconds.
 - `FRAMERATE` is the number of frames per second (_default 0.5_).
+
+## Video
+
+```bash
+FRAMERATE=0.5
+ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y timer.mp4
+ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
+  -filter_complex "overlay=0:0" -y graph-0.mp4
+ffmpeg -i graph-0.mp4 -c copy -movflags faststart -y graph-1.mp4
+```
