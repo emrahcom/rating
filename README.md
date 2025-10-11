@@ -47,3 +47,11 @@ cd split
 split -b 10M ../graph-1.mp4
 rsync -ave "ssh -p 22" ../split/ remote-host:/mnt/store/project-name/split/
 ```
+
+## On remote
+
+```bash
+cd /mnt/store/project-name
+cat split/* >graph-1.mp4
+md5sum graph-1.mp4
+```
