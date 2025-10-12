@@ -39,6 +39,10 @@ the actual timer match each others.
 ```bash
 FRAMERATE=0.5
 ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y /tmp/timer.mp4
+
+# Watch and check /tmp/timer.mp4
+mpv /tmp/timer.mp4
+
 ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
   -filter_complex "overlay=0:0" -y output/graph-0.mp4
 ffmpeg -i output/graph-0.mp4 -c copy -movflags faststart -y output/graph-1.mp4

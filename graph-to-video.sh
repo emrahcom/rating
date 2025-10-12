@@ -29,6 +29,12 @@ set -e
 # video:
 #   FRAMERATE=0.5
 #   ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y /tmp/timer.mp4
+#   ffmpeg -r 0.5 -i frames/%06d.png -c:v libx264 -pix_fmt yuv420p -r 30 \
+#       -y /tmp/timer.mp4
+#
+#   # Watch and check /tmp/timer.mp4
+#   mpv /tmp/timer.mp4
+#
 #   ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
 #       -filter_complex "overlay=0:0" -y output/graph-0.mp4
 #   ffmpeg -i output/graph-0.mp4 -c copy -movflags faststart \
@@ -73,7 +79,6 @@ fi
 
 NUMERATED_PIXELS=$(bc <<< "$X1 - $X0")
 PPS=$(bc <<< "scale=6; $NUMERATED_PIXELS/$SECONDS")
-BGCOLOR="rgba(0, 0, 0, 0%)"
 BOXCOLOR="rgb(255, 0, 0)"
 BOXWIDTH=2
 
