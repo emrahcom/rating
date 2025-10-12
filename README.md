@@ -37,8 +37,8 @@ apt-get install imagemagick bc
 FRAMERATE=0.5
 ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y /tmp/timer.mp4
 ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
-  -filter_complex "overlay=0:0" -y graph-0.mp4
-ffmpeg -i graph-0.mp4 -c copy -movflags faststart -y graph-1.mp4
+  -filter_complex "overlay=0:0" -y output/graph-0.mp4
+ffmpeg -i output/graph-0.mp4 -c copy -movflags faststart -y output/graph-1.mp4
 ```
 
 ## Upload
@@ -48,7 +48,7 @@ Manually clear the remote folder before uploading.
 ```bash
 mkdir split
 cd split
-split -b 10M ../graph-1.mp4
+split -b 10M ../output/graph-1.mp4
 rsync -ave "ssh -p 22" ../split/ remote-host:/mnt/store/project-name/split/
 ```
 
