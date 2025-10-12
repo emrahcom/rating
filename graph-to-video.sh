@@ -29,8 +29,6 @@ set -e
 # video:
 #   FRAMERATE=0.5
 #   ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y /tmp/timer.mp4
-#   ffmpeg -r 0.5 -i frames/%06d.png -c:v libx264 -pix_fmt yuv420p -r 30 \
-#       -y /tmp/timer.mp4
 #
 #   # Watch and check /tmp/timer.mp4
 #   mpv /tmp/timer.mp4
