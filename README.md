@@ -33,6 +33,9 @@ apt-get install imagemagick bc
 
 ## Video
 
+Watch `timer.mp4` before generating graph videos. Check if timer in graphic and
+the actual timer match each others.
+
 ```bash
 FRAMERATE=0.5
 ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y /tmp/timer.mp4
