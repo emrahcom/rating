@@ -14,13 +14,14 @@ apt-get install imagemagick bc
   - Chart with:
     - Line
     - Line only
-    - Dislay legend: Top
+    - Display legend: Top
 - Graph is captured by scrot while zooming (ctrl+shift+j) in Calc.
 - Graph is a chart modified by GIMP
   - It should have the same resolution with the source video (ex. 1920x1080)
   - Glue the advertisement edges. Remove the second minute of advertisement.
-  - Graph should be transparent
-  - Inverted color may be better
+  - Vertical blue line at advertisement points with a short description.
+  - Inverted color may be better.
+  - Graph should be transparent.
 
 ## Parameters
 
