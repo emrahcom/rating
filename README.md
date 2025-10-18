@@ -25,12 +25,19 @@ apt-get install imagemagick bc
 
 ## Parameters
 
+- `GRAPH` is the path of the graphic.
 - `X0` is the pixel coordinate for starting point on X axis.
 - `X1` is the pixel coordinate for ending point on X axis.
 - `Y0` is the pixel coordinate for top point of the slider on Y axis.
 - `Y1` is the pixel coordinate for bottom point of the slider on Y axis.
 - `SECONDS` is the X axis length of the active part [`X0`, `X1`] as seconds.
 - `FRAMERATE` is the number of frames per second (_default 0.5_).
+
+## Frames
+
+```bash
+bash graph-to-video.sh <GRAPH> <X0> <X1> <Y0> <Y1> <SECONDS>
+```
 
 ## Video
 
