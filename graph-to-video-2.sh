@@ -6,7 +6,7 @@ set -e
 #   apt-get install imagemagick bc
 #
 # usage:
-#   bash graph-to-video.sh <GRAPH>
+#   bash graph-to-video-2.sh <GRAPH>
 #
 # notes:
 #   - graph is a chart prepared by LibreOffice Calc using data
@@ -28,9 +28,10 @@ set -e
 #     - Get the pixel difference of these two points
 #     - Calculate the pixels per second
 #     - PPS = number_of_pixels / time_difference_as second
+#     - See PPS line and use bc with correct values
 #   - Y0 is the pixel coordinate for top point of the slider on Y axis
 #   - Y1 is the pixel coordinate for bottom point of the slider on Y axis
-#   - SECONDS is the X axis length of the active part [X0, X1] as seconds
+#   - SECONDS is the length of the video in seconds
 #   - FRAMERATE is the number of frames per second (default 0.5)
 #
 # video:
@@ -61,24 +62,29 @@ set -e
 mkdir -p frames
 rm -f frames/*.png
 
-# Graph path such as /tmp/graph.png
+# Graph's path such as /tmp/graph.png
 GRAPH=$1
 # Pixel coordinate of the starting point on X axis, e.g. 120
 X0=136
-# Pixel per second, e.g. 0.150
+# Pixels per second, e.g. 0.150
+# pixels_difference_of_two_points / time_in_sec
 PPS=$(bc <<< "scale=6; (1750 - 139) / (3 * 3600)")
 # Pixel coordinate of the top point of the slider on Y axis, e.g. 90
 Y0=96
 # Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
 Y1=954
-# Length of the video as second, e.g. 9112
+# Length of the video in second, e.g. 9112
 SECONDS=9112
 # Number of frames per second (default 0.5)
 FRAMERATE=0.5
 
 # Breaks
-# Seconds are the second in video, not in the timeline...
-# Pixels are the length of the break as pixel.
+# Seconds are the second in the video, not in the timeline...
+#   - The video doesn't contain advertisements
+#   - Be careful if the next part repeats the same scenes. Use the coordianate
+#     of the next scene.
+# Pixels are the length of the break in pixels.
+#   - Update the codes in loop if the number of breaks is updated.
 SEC1=20
 PXL1=150.66
 SEC2=8984
@@ -99,18 +105,22 @@ SEQ_END=$(bc <<< "scale=0; $SECONDS*$FRAMERATE")
 for i in $(seq -f "%06g" 0 $SEQ_END); do
     x0=$(bc <<< "scale=4; $X0 + $PPS*$i/$FRAMERATE")
 
+    # second of the video. not the timeline...
     sec=$(bc <<< "scale=4; $i/$FRAMERATE")
 
+    # Add the break time if the second is bigger than the breakpoint's time
     COMP=$(bc <<< "$sec > $SEC1")
     if [[ "$COMP" -eq 1 ]]; then
       x0=$(bc <<< "scale=4; $x0 + $PXL1")
     fi
 
+    # Add the break time if the second is bigger than the breakpoint's time
     COMP=$(bc <<< "$sec > $SEC2")
     if [[ "$COMP" -eq 1 ]]; then
       x0=$(bc <<< "scale=4; $x0 + $PXL2")
     fi
 
+    # Add the break time if the second is bigger than the breakpoint's time
     COMP=$(bc <<< "$sec > $SEC3")
     if [[ "$COMP" -eq 1 ]]; then
       x0=$(bc <<< "scale=4; $x0 + $PXL3")
