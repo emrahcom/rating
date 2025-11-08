@@ -16,6 +16,8 @@ set -e
 #   - graph is captured by scrot while zooming (ctrl+shift+j) in Calc
 #   - graph is a chart modified by GIMP
 #     - it should have the same resolution with the source video (ex. 1920x1080)
+#     - X axis should be shifted to the left by 30 seconds since the value of
+#       point is the average rating of the next minute.
 #     - add advertisement periods by putting rectangle areas with color #d9e303
 #       on a layer with 40% transparency
 #     - inverted color
