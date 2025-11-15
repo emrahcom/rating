@@ -10,9 +10,18 @@ set -e
 #
 # notes:
 #   - graph is a chart prepared by LibreOffice Calc using data
+#     - first, save as ODS (dakikalik.ods)
+#     - Copy the sheet as 'rating'.
 #     - don't remove the advertisement periods.
 #     - start ~10 min earlier (select an even minute)
 #     - stop after ~2 min (select an even minute)
+#   - Create an empty sheet, graph
+#     - Insert chart
+#     - Line -> Lines only, Line type: smooth
+#     - Data series in columns
+#     - Display legend at top
+#     - Make full screen with even numbers in X axis.
+#     - Space between X axis and the bottom to make it visiable all the time.
 #   - graph is captured by scrot while zooming (ctrl+shift+j) in Calc
 #   - graph is a chart modified by GIMP
 #     - it should have the same resolution with the source video (ex. 1920x1080)
@@ -33,8 +42,9 @@ set -e
 #     - See PPS line and use bc with correct values
 #   - Y0 is the pixel coordinate for top point of the slider on Y axis
 #   - Y1 is the pixel coordinate for bottom point of the slider on Y axis
-#   - SECONDS is the length of the video in seconds
+#   - SECONDS is the length of the video (MP4 file) in seconds
 #   - FRAMERATE is the number of frames per second (default 0.5)
+#   - BREAKS
 #
 # video:
 #   FRAMERATE=0.5
@@ -66,33 +76,35 @@ rm -f frames/*.png
 
 # Graph's path such as /tmp/graph.png
 GRAPH=$1
-# Pixel coordinate of the starting point on X axis, e.g. 120
-X0=136
+# Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
+X0=103
 # Pixels per second, e.g. 0.150
 # pixels_difference_of_two_points / time_in_sec
-PPS=$(bc <<< "scale=6; (1750 - 139) / (3 * 3600)")
+PPS=$(bc <<< "scale=6; (1795 - 138) / (3 * 3600)")
 # Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-Y0=96
+Y0=68
 # Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-Y1=954
-# Length of the video in second, e.g. 9112
-SECONDS=9112
+Y1=973
+# Length of the video (MP4 file) in second, e.g. 9112
+SECONDS=9788
 # Number of frames per second (default 0.5)
 FRAMERATE=0.5
 
 # Breaks
-# Seconds are the second in the video, not in the timeline...
+# - Seconds are the second in the video (MP4 file), not in the timeline...
 #   - The video doesn't contain advertisements
 #   - Be careful if the next part repeats the same scenes. Use the coordianate
 #     of the next scene.
-# Pixels are the length of the break in pixels.
+# - Advertisements are the lenght of the break in seconds.
+# - Pixels are the length of the break in pixels.
 #   - Update the codes in loop if the number of breaks is updated.
-SEC1=20
-PXL1=150.66
-SEC2=8984
-PXL2=247
-SEC3=9044
-PXL3=9
+SEC1=214
+ADV1=826
+PXL1=$(bc <<< "scale=6; $PPS * $ADV1")
+
+SEC2=9694
+ADV2=944
+PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
 
 if [[ $# -ne 1 ]]; then
   echo "Missing argument"
@@ -110,22 +122,16 @@ for i in $(seq -f "%06g" 0 $SEQ_END); do
     # second of the video. not the timeline...
     sec=$(bc <<< "scale=4; $i/$FRAMERATE")
 
-    # Add the break time if the second is bigger than the breakpoint's time
+    # Add the break1 time if the second is bigger than the breakpoint's time
     COMP=$(bc <<< "$sec > $SEC1")
     if [[ "$COMP" -eq 1 ]]; then
       x0=$(bc <<< "scale=4; $x0 + $PXL1")
     fi
 
-    # Add the break time if the second is bigger than the breakpoint's time
+    # Add the break2 time if the second is bigger than the breakpoint's time
     COMP=$(bc <<< "$sec > $SEC2")
     if [[ "$COMP" -eq 1 ]]; then
       x0=$(bc <<< "scale=4; $x0 + $PXL2")
-    fi
-
-    # Add the break time if the second is bigger than the breakpoint's time
-    COMP=$(bc <<< "$sec > $SEC3")
-    if [[ "$COMP" -eq 1 ]]; then
-      x0=$(bc <<< "scale=4; $x0 + $PXL3")
     fi
 
     x1=$(bc <<< "scale=4; $x0 + $BOXWIDTH")
