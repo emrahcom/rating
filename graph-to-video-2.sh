@@ -9,8 +9,8 @@ set -e
 #   bash graph-to-video-2.sh <GRAPH>
 #
 # notes:
-#   - graph is a chart prepared by LibreOffice Calc using data
-#     - first, save as ODS (dakikalik.ods)
+#   - graph is a chart prepared by LibreOffice Calc using the rating data
+#     - first, save as ODS (minutes.ods)
 #     - Copy the sheet as 'rating'.
 #     - don't remove the advertisement periods.
 #     - start ~10 min earlier (select an even minute)
@@ -19,9 +19,9 @@ set -e
 #     - Insert chart
 #     - Line -> Lines only, Line type: smooth
 #     - Data series in columns
-#     - Display legend at top
+#     - Display the legend at top
 #     - Make full screen with even numbers in X axis.
-#     - Space between X axis and the bottom to make it visiable all the time.
+#     - Space between X axis and the bottom to make it visible all the time.
 #   - graph is captured by scrot while zooming (ctrl+shift+j) in Calc
 #   - graph is a chart modified by GIMP
 #     - it should have the same resolution with the source video (ex. 1920x1080)
@@ -44,7 +44,7 @@ set -e
 #   - Y1 is the pixel coordinate for bottom point of the slider on Y axis
 #   - SECONDS is the length of the video (MP4 file) in seconds
 #   - FRAMERATE is the number of frames per second (default 0.5)
-#   - BREAKS
+#   - set BREAKS
 #
 # video:
 #   FRAMERATE=0.5
@@ -93,15 +93,16 @@ FRAMERATE=0.5
 # Breaks
 # - Seconds are the second in the video (MP4 file), not in the timeline...
 #   - The video doesn't contain advertisements
-#   - Be careful if the next part repeats the same scenes. Use the coordianate
+#   - Be careful if the next part repeats the same scenes. Use the coordinate
 #     of the next scene.
 # - Advertisements are the lenght of the break in seconds.
 # - Pixels are the length of the break in pixels.
-#   - Update the codes in loop if the number of breaks is updated.
+# - Update the codes in loop if the number of breaks is updated.
 SEC1=214
 ADV1=826
 PXL1=$(bc <<< "scale=6; $PPS * $ADV1")
 
+# Seconds from the start, minus previous advertisement times.
 SEC2=9694
 ADV2=944
 PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
