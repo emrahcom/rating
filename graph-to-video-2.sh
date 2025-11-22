@@ -106,7 +106,7 @@ PXL1=$(bc <<< "scale=6; $PPS * $ADV1")
 
 # Seconds from the start, minus previous advertisement times.
 SEC2=9168
-ADV2=644
+ADV2=1244
 PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
 
 if [[ $# -ne 1 ]]; then
