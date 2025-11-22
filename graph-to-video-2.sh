@@ -25,11 +25,13 @@ set -e
 #   - graph is captured by scrot while zooming (ctrl+shift+j) in Calc
 #   - graph is a chart modified by GIMP
 #     - it should have the same resolution with the source video (ex. 1920x1080)
+#     - First, calculate PPS
 #     - X axis should be shifted to the left by 30 seconds since the value of
 #       point is the average rating of the next minute.
+#     - Start and end time with color #0815ca (delete and fill)
 #     - add advertisement periods by putting rectangle areas with color #d9e303
 #       on a layer with 40% transparency
-#     - inverted color
+#     - inverted color (merge layers before inverting)
 #     - graph should be transparent, remove black area
 #
 #   - X0 is the pixel coordinate for starting point on X axis
@@ -77,16 +79,16 @@ rm -f frames/*.png
 # Graph's path such as /tmp/graph.png
 GRAPH=$1
 # Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
-X0=103
+X0=131.83
 # Pixels per second, e.g. 0.150
 # pixels_difference_of_two_points / time_in_sec
-PPS=$(bc <<< "scale=6; (1795 - 138) / (3 * 3600)")
+PPS=$(bc <<< "scale=6; (1798 - 154) / (3 * 3600)")
 # Pixel coordinate of the top point of the slider on Y axis, e.g. 90
 Y0=68
 # Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
 Y1=973
 # Length of the video (MP4 file) in second, e.g. 9112
-SECONDS=9788
+SECONDS=9261
 # Number of frames per second (default 0.5)
 FRAMERATE=0.5
 
@@ -98,13 +100,13 @@ FRAMERATE=0.5
 # - Advertisements are the lenght of the break in seconds.
 # - Pixels are the length of the break in pixels.
 # - Update the codes in loop if the number of breaks is updated.
-SEC1=214
-ADV1=826
+SEC1=116
+ADV1=946
 PXL1=$(bc <<< "scale=6; $PPS * $ADV1")
 
 # Seconds from the start, minus previous advertisement times.
-SEC2=9694
-ADV2=944
+SEC2=9168
+ADV2=644
 PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
 
 if [[ $# -ne 1 ]]; then
