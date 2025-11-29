@@ -88,7 +88,7 @@ Y0=68
 # Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
 Y1=973
 # Length of the video (MP4 file) in second, e.g. 9112
-SECONDS=9261
+SECONDS=9936
 # Number of frames per second (default 0.5)
 FRAMERATE=0.5
 
@@ -101,13 +101,23 @@ FRAMERATE=0.5
 # - Pixels are the length of the break in pixels.
 # - Update the codes in loop if the number of breaks is updated.
 SEC1=116
-ADV1=946
+ADV1=712
 PXL1=$(bc <<< "scale=6; $PPS * $ADV1")
 
 # Seconds from the start, minus previous advertisement times.
-SEC2=9168
-ADV2=1244
+SEC2=314
+ADV2=44
 PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
+
+# Third from the start, minus previous advertisement times.
+SEC3=5816
+ADV3=838
+PXL3=$(bc <<< "scale=6; $PPS * $ADV2")
+
+# Forth from the start, minus previous advertisement times.
+SEC4=9826
+ADV4=814
+PXL4=$(bc <<< "scale=6; $PPS * $ADV2")
 
 if [[ $# -ne 1 ]]; then
   echo "Missing argument"
@@ -135,6 +145,18 @@ for i in $(seq -f "%06g" 0 $SEQ_END); do
     COMP=$(bc <<< "$sec > $SEC2")
     if [[ "$COMP" -eq 1 ]]; then
       x0=$(bc <<< "scale=4; $x0 + $PXL2")
+    fi
+
+    # Add the break3 time if the second is bigger than the breakpoint's time
+    COMP=$(bc <<< "$sec > $SEC3")
+    if [[ "$COMP" -eq 1 ]]; then
+      x0=$(bc <<< "scale=4; $x0 + $PXL3")
+    fi
+
+    # Add the break4 time if the second is bigger than the breakpoint's time
+    COMP=$(bc <<< "$sec > $SEC4")
+    if [[ "$COMP" -eq 1 ]]; then
+      x0=$(bc <<< "scale=4; $x0 + $PXL4")
     fi
 
     x1=$(bc <<< "scale=4; $x0 + $BOXWIDTH")
