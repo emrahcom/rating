@@ -17,7 +17,7 @@ set -e
 #     - stop after ~2 min (select an even minute)
 #   - Create an empty sheet, graph
 #     - Insert chart
-#     - Line -> Lines only, Line type: smooth
+#     - Line -> Lines only, Line type: smooth or straight
 #     - Data series in columns
 #     - Display the legend at top
 #     - Make full screen with even numbers in X axis.
@@ -79,14 +79,14 @@ rm -f frames/*.png
 # Graph's path such as /tmp/graph.png
 GRAPH=$1
 # Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
-X0=131.83
+X0=144
 # Pixels per second, e.g. 0.150
 # pixels_difference_of_two_points / time_in_sec
-PPS=$(bc <<< "scale=6; (1798 - 154) / (3 * 3600)")
+PPS=$(bc <<< "scale=6; (1821 - 294) / (3 * 3600)")
 # Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-Y0=68
+Y0=72
 # Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-Y1=973
+Y1=934
 # Length of the video (MP4 file) in second, e.g. 9112
 SECONDS=9936
 # Number of frames per second (default 0.5)
