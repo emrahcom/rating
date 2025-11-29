@@ -112,12 +112,12 @@ PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
 # Third from the start, minus previous advertisement times.
 SEC3=5816
 ADV3=838
-PXL3=$(bc <<< "scale=6; $PPS * $ADV2")
+PXL3=$(bc <<< "scale=6; $PPS * $ADV3")
 
 # Forth from the start, minus previous advertisement times.
 SEC4=9826
 ADV4=814
-PXL4=$(bc <<< "scale=6; $PPS * $ADV2")
+PXL4=$(bc <<< "scale=6; $PPS * $ADV4")
 
 if [[ $# -ne 1 ]]; then
   echo "Missing argument"
