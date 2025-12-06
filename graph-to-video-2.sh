@@ -88,7 +88,7 @@ Y0=72
 # Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
 Y1=934
 # Length of the video (MP4 file) in second, e.g. 9112
-SECONDS=9936
+SECONDS=9085
 # Number of frames per second (default 0.5)
 FRAMERATE=0.5
 
@@ -100,23 +100,23 @@ FRAMERATE=0.5
 # - Advertisements are the lenght of the break in seconds.
 # - Pixels are the length of the break in pixels.
 # - Update the codes in loop if the number of breaks is updated.
-SEC1=116
-ADV1=712
+SEC1=125
+ADV1=803
 PXL1=$(bc <<< "scale=6; $PPS * $ADV1")
 
 # Seconds from the start, minus previous advertisement times.
-SEC2=314
-ADV2=44
+SEC2=5390
+ADV2=927
 PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
 
 # Third from the start, minus previous advertisement times.
-SEC3=5816
-ADV3=838
+SEC3=8982
+ADV3=768
 PXL3=$(bc <<< "scale=6; $PPS * $ADV3")
 
 # Forth from the start, minus previous advertisement times.
-SEC4=9826
-ADV4=814
+SEC4=9100
+ADV4=0
 PXL4=$(bc <<< "scale=6; $PPS * $ADV4")
 
 if [[ $# -ne 1 ]]; then
