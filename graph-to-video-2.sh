@@ -57,8 +57,10 @@ set -e
 #
 #   ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
 #       -filter_complex "overlay=0:0" -y output/graph-0.mp4
-#   ffmpeg -i output/graph-0.mp4 -c copy -movflags faststart \
+#   ffmpeg -i output/graph-0.mp4 -c:v libx264 -b:v 2000k -pix_fmt yuv420p \
 #       -y output/graph-1.mp4
+#   ffmpeg -i output/graph-1.mp4 -c copy -movflags faststart \
+#       -y output/graph-2.mp4
 #
 # upload:
 #   manually clear the remote folder before uploading
@@ -79,14 +81,14 @@ rm -f frames/*.png
 # Graph's path such as /tmp/graph.png
 GRAPH=$1
 # Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
-X0=144
+X0=110
 # Pixels per second, e.g. 0.150
 # pixels_difference_of_two_points / time_in_sec
-PPS=$(bc <<< "scale=6; (1821 - 294) / (3 * 3600)")
+PPS=$(bc <<< "scale=6; (1886 - 218) / (3 * 3600)")
 # Pixel coordinate of the top point of the slider on Y axis, e.g. 90
 Y0=72
 # Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-Y1=934
+Y1=948
 # Length of the video (MP4 file) in second, e.g. 9112
 SECONDS=9085
 # Number of frames per second (default 0.5)
