@@ -3,7 +3,7 @@
 //   apt-get install imagemagick
 //
 // usage:
-//   deno run --allow-run graph-to-video-2.ts
+//   deno run --allow-run --allo-read --allow-write graph-to-video-2.ts
 //
 // notes:
 //   - graph is a chart prepared by LibreOffice Calc using the rating data
@@ -73,8 +73,6 @@
 //   cat split/* >graph-1.mp4
 //   md5sum graph-1.mp4
 // -----------------------------------------------------------------------------
-// Graph's path such as /tmp/graph.png
-const GRAPH = "/home/emrah/test/tbd/09/graph-0-1080i.png";
 // Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
 const X0 = 110;
 // Pixels per second, e.g. 0.150
@@ -121,6 +119,22 @@ const BOX_COLOR = "rgb(255, 0, 0)";
 const BOX_WIDTH = 2;
 
 // -----------------------------------------------------------------------------
+// Fail if no argument.
+if (Deno.args.length === 0) {
+  console.error("Missing argument. Usage:");
+  console.error("  deno run --allow-run -RW graph-to-video-2.ts <GRAPH>");
+  Deno.exit(1);
+}
+const GRAPH = Deno.args[0];
+
+// Fail if no file.
+const graphStatus = await Deno.stat(GRAPH);
+if (!graphStatus.isFile) {
+  console.error("No file");
+  Deno.exit(1);
+}
+
+// Fail if the frame directory is no writable.
 try {
   await Deno.mkdir(FRAMES_DIR, { recursive: true });
 
@@ -160,6 +174,7 @@ for (let i = 0; i <= lastFrame; i++) {
 
   console.log(`${i} [${sec} s]: ${x0.toFixed(6)} - ${x1.toFixed(6)}`);
 
+  // Create each frame.
   const command = new Deno.Command("convert", {
     args: [
       GRAPH,
