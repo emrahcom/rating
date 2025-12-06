@@ -54,11 +54,8 @@
 //   mpv /tmp/timer.mp4
 //
 //   ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
-//       -filter_complex "overlay=0:0" -y output/graph-0.mp4
-//   ffmpeg -i output/graph-0.mp4 -c:v libx264 -b:v 2000k -pix_fmt yuv420p \
-//       -y output/graph-1.mp4
-//   ffmpeg -i output/graph-1.mp4 -c copy -movflags faststart \
-//       -y output/graph-2.mp4
+//       -filter_complex "overlay=0:0" -c:v libsvtav1 -movflags faststart \
+//       -y output/rating.mp4
 //
 // upload:
 //   manually clear the remote folder before uploading
