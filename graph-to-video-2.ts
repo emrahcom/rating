@@ -62,13 +62,13 @@
 //
 //   mkdir split
 //   cd split
-//   split -b 10M ../output/graph-1.mp4
+//   split -b 10M ../output/rating.mp4
 //   rsync -ave "ssh -p 22" ../split/ remote-host:/mnt/store/project-name/split/
 //
 // on remote:
 //   cd /mnt/store/project-name
-//   cat split/* >graph-1.mp4
-//   md5sum graph-1.mp4
+//   cat split/* >rating-x.mp4
+//   md5sum rating-x.mp4
 // -----------------------------------------------------------------------------
 // Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
 const X0 = 139;
