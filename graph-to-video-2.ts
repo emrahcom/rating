@@ -3,7 +3,7 @@
 //   apt-get install imagemagick
 //
 // usage:
-//   deno run --allow-run --allo-read --allow-write graph-to-video-2.ts
+//   deno run --allow-run --allow-read --allow-write graph-to-video-2.ts <GRAPH>
 //
 // notes:
 //   - graph is a chart prepared by LibreOffice Calc using the rating data
@@ -71,16 +71,16 @@
 //   md5sum graph-1.mp4
 // -----------------------------------------------------------------------------
 // Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
-const X0 = 110;
+const X0 = 139;
 // Pixels per second, e.g. 0.150
 // pixels_difference_of_two_points / time_in_sec
-const PPS = (1886 - 218) / (3 * 3600);
+const PPS = (1750 - 147) / (3 * 3600);
 // Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-const Y0 = 72;
+const Y0 = 60;
 // Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-const Y1 = 948;
+const Y1 = 956;
 // Length of the video (MP4 file) in second, e.g. 9112
-const SECONDS = 9085;
+const SECONDS = 8138;
 // Number of frames per second (default 0.5)
 const FRAMERATE = 0.5;
 
@@ -92,18 +92,18 @@ const FRAMERATE = 0.5;
 // - Advertisements are the lenght of the break in seconds.
 // - Pixels are the length of the break in pixels.
 // - Update the codes in loop if the number of breaks is updated.
-const SEC1 = 125;
-const ADV1 = 803;
+const SEC1 = 148;
+const ADV1 = 933;
 const PXL1 = PPS * ADV1;
 
 // Seconds from the start, minus previous advertisement times.
-const SEC2 = 5390;
-const ADV2 = 927;
+const SEC2 = 4565;
+const ADV2 = 895;
 const PXL2 = PPS * ADV2;
 
 // Third from the start, minus previous advertisement times.
-const SEC3 = 8982;
-const ADV3 = 768;
+const SEC3 = 8044;
+const ADV3 = 1792;
 const PXL3 = PPS * ADV3;
 
 // Forth from the start, minus previous advertisement times.
