@@ -25,10 +25,11 @@
 //     - First, calculate PPS
 //     - X axis should be shifted to the left by 30 seconds since the value of
 //       point is the average rating of the next minute.
-//     - Start and end time with color #0815ca (delete and fill)
+//     - start and end time with color #0815ca (delete and fill)
 //     - add advertisement periods by putting rectangle areas with color #d9e303
-//       on a layer with 40% transparency
-//     - inverted color (merge layers before inverting)
+//       on a layer with 50% transparency
+//     - merge visible layers
+//     - inverted color
 //     - graph should be transparent, remove black area
 //
 //   - GRAPH is the path of PNG.
@@ -71,16 +72,16 @@
 //   md5sum rating-x.mp4
 // -----------------------------------------------------------------------------
 // Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
-const X0 = 139;
+const X0 = 159;
 // Pixels per second, e.g. 0.150
 // pixels_difference_of_two_points / time_in_sec
-const PPS = (1750 - 147) / (3 * 3600);
+const PPS = (1865 - 85) / (3 * 3600);
 // Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-const Y0 = 60;
+const Y0 = 70;
 // Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-const Y1 = 956;
+const Y1 = 952;
 // Length of the video (MP4 file) in second, e.g. 9112
-const SECONDS = 8138;
+const SECONDS = 8118;
 // Number of frames per second (default 0.5)
 const FRAMERATE = 0.5;
 
@@ -91,19 +92,19 @@ const FRAMERATE = 0.5;
 //     of the next scene.
 // - Advertisements are the lenght of the break in seconds.
 // - Pixels are the length of the break in pixels.
-// - Update the codes in loop if the number of breaks is updated.
-const SEC1 = 148;
-const ADV1 = 933;
+// - Update the codes in loop if the number of breaks is more than 4.
+const SEC1 = 118;
+const ADV1 = 836;
 const PXL1 = PPS * ADV1;
 
 // Seconds from the start, minus previous advertisement times.
-const SEC2 = 4565;
-const ADV2 = 895;
+const SEC2 = 4752;
+const ADV2 = 806;
 const PXL2 = PPS * ADV2;
 
 // Third from the start, minus previous advertisement times.
-const SEC3 = 8044;
-const ADV3 = 1792;
+const SEC3 = 8018;
+const ADV3 = 682;
 const PXL3 = PPS * ADV3;
 
 // Forth from the start, minus previous advertisement times.
