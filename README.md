@@ -6,40 +6,68 @@
 apt-get install imagemagick bc
 ```
 
-## Graph
+## Source video
 
-- Graph is a chart prepared by LibreOffice Calc using data.
-  - Remove the advertisement periods. keep the initial 2 mins.
-  - Copy the last minute data to the initial minute of advertisement.
-  - Chart with:
-    - Line
-    - Line only
-    - Display legend: Top
-- Graph is captured by scrot while zooming (ctrl+shift+j) in Calc.
-- Graph is a chart modified by GIMP
-  - It should have the same resolution with the source video (ex. 1920x1080)
-  - Glue the advertisement edges. Remove the second minute of advertisement.
-  - Vertical blue line at advertisement points with a short description.
-  - Inverted color may be better.
-  - Graph should be transparent.
+```bash
+EPISODE=1
+
+ffmpeg -ss 00:00:05.0 -i tbd-$EPISODE-raw.mp4 \
+  -vf "scale=1920:1080:flags=lanczos" -c:v libsvtav1 -movflags faststart \
+  -c:a copy -y tbd-$EPISODE-1080.mp4
+```
+
+## Source graph
+
+- Graph is a chart prepared by LibreOffice Calc using the rating data.
+  - First, save as ODS, `minutes.ods`
+  - Copy the sheet as 'rating', don't update the original sheet.
+  - Don't remove the advertisement periods.
+  - Start ~10 min earlier (select an even minute)
+  - Stop after ~2 min (select an even minute)
+- Create an empty sheet, `graph`
+  - Insert chart
+  - Line -> Lines only, Line type: smooth or straight
+  - Data series in columns.
+  - Display the legend at top
+  - Make full screen with even numbers in X axis.
+  - Put space between X axis and the bottom to make it visible all the time.
+- Graph is captured by scrot while zooming (`ctrl+shift+j`) in Calc.
+- Graph is a chart modified by GIMP.
+  - It should have the same resolution with the source video, `1920x1080`
+  - First, calculate PPS (pixel per second)
+  - X axis should be shifted to the left by 30 seconds since the value of point
+    is the average rating of the next minute.
+  - Start and end time with color `#0815ca` (delete and fill)
+  - Add advertisement periods by putting rectangle areas with color `#d9e303` on
+    a layer with `50%` transparency.
+  - Merge visible layers.
+  - Inverted color.
+  - Graph should be transparent, remove black area.
 
 ## Parameters
 
-- `GRAPH` is the path of the graphic.
-- `X0` is the pixel coordinate for starting point on X axis.
-- `X1` is the pixel coordinate for ending point on X axis.
+- `GRAPH` is the path of PNG file.
+- `X0` is the pixel coordinate for starting point on X axis. Use minus 1 pixel
+  because the vertical line's width is 2 pixels.
+- `PPS` is the pixels per second.
+  - Select a long range such as from 21:00 to 24:00
+  - Get the pixel difference of these two points.
+  - Calculate the pixels per second.
+    `PPS = number_of_pixels / time_difference_as second`
+  - Check `PPS` line in script and put correct values to calculate it.
 - `Y0` is the pixel coordinate for top point of the slider on Y axis.
 - `Y1` is the pixel coordinate for bottom point of the slider on Y axis.
-- `SECONDS` is the X axis length of the active part [`X0`, `X1`] as seconds.
-- `FRAMERATE` is the number of frames per second (_default 0.5_).
+- `SECONDS` is the length of the video (MP4 file) in seconds.
+- `FRAMERATE` is the number of frames per second (default 0.5).
+- Set `BREAKS`.
 
-## Frames
+## Generating frames
 
 ```bash
-bash graph-to-video.sh <GRAPH> <X0> <X1> <Y0> <Y1> <SECONDS>
+deno run --allow-run --allow-read --allow-write graph-to-video-2.ts <GRAPH>
 ```
 
-## Video
+## Output Video
 
 Watch `timer.mp4` before generating graph videos. Check if timer in graphic and
 the actual timer match each others.
@@ -52,25 +80,6 @@ ffmpeg -r $FRAMERATE -i frames/%06d.png -vcodec h264 -y /tmp/timer.mp4
 mpv /tmp/timer.mp4
 
 ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
-  -filter_complex "overlay=0:0" -y output/graph-0.mp4
-ffmpeg -i output/graph-0.mp4 -c copy -movflags faststart -y output/graph-1.mp4
-```
-
-## Upload
-
-Manually clear the remote folder before uploading.
-
-```bash
-mkdir split
-cd split
-split -b 10M ../output/graph-1.mp4
-rsync -ave "ssh -p 22" ../split/ remote-host:/mnt/store/project-name/split/
-```
-
-## On remote
-
-```bash
-cd /mnt/store/project-name
-cat split/* >graph-1.mp4
-md5sum graph-1.mp4
+  -filter_complex "overlay=0:0" -c:v libsvtav1 -movflags faststart \
+  -y output/rating.mp4
 ```
