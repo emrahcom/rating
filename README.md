@@ -64,7 +64,7 @@ ffmpeg -ss 00:00:05.0 -i tbd-$EPISODE-raw.mp4 \
 ## Generating frames
 
 ```bash
-deno run --allow-run --allow-read --allow-write graph-to-video-2.ts <GRAPH>
+deno run --allow-run --allow-read --allow-write graph-to-video.ts <GRAPH>
 ```
 
 ## Output Video

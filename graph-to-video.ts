@@ -3,7 +3,7 @@
 //   apt-get install imagemagick
 //
 // usage:
-//   deno run --allow-run --allow-read --allow-write graph-to-video-2.ts <GRAPH>
+//   deno run --allow-run --allow-read --allow-write graph-to-video.ts <GRAPH>
 //
 // notes:
 //   - graph is a chart prepared by LibreOffice Calc using the rating data
