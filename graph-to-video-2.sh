@@ -102,21 +102,23 @@ FRAMERATE=0.5
 # - Advertisements are the lenght of the break in seconds.
 # - Pixels are the length of the break in pixels.
 # - Update the codes in loop if the number of breaks is updated.
+
+# First break
 SEC1=125
 ADV1=803
 PXL1=$(bc <<< "scale=6; $PPS * $ADV1")
 
-# Seconds from the start, minus previous advertisement times.
+# Second break
 SEC2=5390
 ADV2=927
 PXL2=$(bc <<< "scale=6; $PPS * $ADV2")
 
-# Third from the start, minus previous advertisement times.
+# Third break
 SEC3=8982
 ADV3=768
 PXL3=$(bc <<< "scale=6; $PPS * $ADV3")
 
-# Forth from the start, minus previous advertisement times.
+# Fourth break
 SEC4=9100
 ADV4=0
 PXL4=$(bc <<< "scale=6; $PPS * $ADV4")

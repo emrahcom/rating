@@ -93,21 +93,23 @@ const FRAMERATE = 0.5;
 // - Advertisements are the lenght of the break in seconds.
 // - Pixels are the length of the break in pixels.
 // - Update the codes in loop if the number of breaks is more than 4.
+
+// First break
 const SEC1 = 154;
 const ADV1 = 900;
 const PXL1 = PPS * ADV1;
 
-// Seconds from the start, minus previous advertisement times.
+// Second break
 const SEC2 = 8686;
 const ADV2 = 768;
 const PXL2 = PPS * ADV2;
 
-// Third from the start, minus previous advertisement times.
+// Third break
 const SEC3 = 9900;
 const ADV3 = 0;
 const PXL3 = PPS * ADV3;
 
-// Forth from the start, minus previous advertisement times.
+// Fourth break
 const SEC4 = 9900;
 const ADV4 = 0;
 const PXL4 = PPS * ADV4;
