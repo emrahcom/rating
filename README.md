@@ -86,6 +86,7 @@ ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
 
 ## Sample
 
-A sample frame from video with a realtime embedded graph.
+A sample frame from video with a realtime embedded graph. The red line shows the
+current position on the timeline.
 
 [![Sample frame](images/frame.jpg)](images/frame.jpg)
