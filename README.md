@@ -87,4 +87,5 @@ ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
 ## Sample
 
 A sample frame from video with a realtime embedded graph.
+
 [![Sample frame](images/frame.jpg)](images/frame.jpg)
