@@ -82,6 +82,12 @@ mpv /tmp/timer.mp4
 ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
   -filter_complex "overlay=0:0" -c:v libsvtav1 -movflags faststart \
   -y output/rating.mp4
+
+# or
+
+ffmpeg -i source.mp4 -r $FRAMERATE -i frames/%06d.png \
+  -filter_complex "overlay=0:0" -c:v h264 -movflags faststart \
+  -y output/rating.mp4
 ```
 
 ## Sample
