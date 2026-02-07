@@ -9,11 +9,11 @@
 const X0 = 151;
 // Pixels per second, e.g. 0.150
 // pixels_difference_of_two_points / time_in_sec
-const PPS = (1900 - 135) / (3 * 3600);
+const PPS = (1812 - 117) / (3 * 3600);
 // Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-const Y0 = 79;
+const Y0 = 67;
 // Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-const Y1 = 921;
+const Y1 = 918;
 // Length of the video (MP4 file) in second, e.g. 9112
 const SECONDS = 8735;
 // Number of frames per second (default 0.5)
