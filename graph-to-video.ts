@@ -29,23 +29,23 @@ const FRAMERATE = 0.5;
 // - Update the codes in loop if the number of breaks is more than 4.
 
 // First break
-const SEC1 = 114;
-const ADV1 = 830;
+const SEC1 = 94;
+const ADV1 = 730;
 const PXL1 = PPS * ADV1;
 
 // Second break
-const SEC2 = 4784;
-const ADV2 = 808;
+const SEC2 = 1168;
+const ADV2 = 88;
 const PXL2 = PPS * ADV2;
 
 // Third break
-const SEC3 = 8642;
-const ADV3 = 747;
+const SEC3 = 4770;
+const ADV3 = 858;
 const PXL3 = PPS * ADV3;
 
 // Fourth break
-const SEC4 = 9999;
-const ADV4 = 0;
+const SEC4 = 8406;
+const ADV4 = 1892;
 const PXL4 = PPS * ADV4;
 
 const FRAMES_DIR = "frames";
