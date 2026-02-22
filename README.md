@@ -41,10 +41,10 @@ ffmpeg -ss 00:00:05.0 -i tbd-$EPISODE-raw.mp4 \
   - Add advertisement periods by putting rectangle areas with color `#d9e303` on
     a layer with `50%` transparency.
   - Merge visible layers.
-  - Save
+  - Export
   - Inverted color.
   - Graph should be transparent, remove black area.
-  - Save as inverted.
+  - Export as inverted.
 
 ## Parameters
 
