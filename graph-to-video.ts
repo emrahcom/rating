@@ -15,7 +15,7 @@ const Y0 = 116;
 // Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
 const Y1 = 912;
 // Length of the video (MP4 file) in second, e.g. 9112
-const SECONDS = 9550;
+const SECONDS = 8156;
 // Number of frames per second (default 0.5)
 const FRAMERATE = 0.5;
 
@@ -29,18 +29,18 @@ const FRAMERATE = 0.5;
 // - Update the codes in loop if the number of breaks is more than 4.
 
 // First break
-const SEC1 = 2186;
-const ADV1 = 960;
+const SEC1 = 118;
+const ADV1 = 773;
 const PXL1 = PPS * ADV1;
 
 // Second break
-const SEC2 = 9450;
-const ADV2 = 1356;
+const SEC2 = 4925;
+const ADV2 = 636;
 const PXL2 = PPS * ADV2;
 
 // Third break
-const SEC3 = 9600;
-const ADV3 = 0;
+const SEC3 = 8063;
+const ADV3 = 571;
 const PXL3 = PPS * ADV3;
 
 // Fourth break
