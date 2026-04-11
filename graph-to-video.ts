@@ -6,16 +6,16 @@
 //   deno run --allow-run --allow-read --allow-write graph-to-video.ts <GRAPH>
 // -----------------------------------------------------------------------------
 // Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
-const X0 = 157;
+const X0 = 163;
 // Pixels per second, e.g. 0.150
 // pixels_difference_of_two_points / time_in_sec
-const PPS = (1709 - 131) / (3 * 3600);
+const PPS = (1812 - 72) / (3 * 3600);
 // Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-const Y0 = 138;
+const Y0 = 133;
 // Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-const Y1 = 928;
+const Y1 = 916;
 // Length of the video (MP4 file) in second, e.g. 9112
-const SECONDS = 8994;
+const SECONDS = 8877;
 // Number of frames per second (default 0.5)
 const FRAMERATE = 0.5;
 
@@ -29,18 +29,18 @@ const FRAMERATE = 0.5;
 // - Update the codes in loop if the number of breaks is more than 4.
 
 // First break
-const SEC1 = 108;
-const ADV1 = 1041;
+const SEC1 = 114;
+const ADV1 = 798;
 const PXL1 = PPS * ADV1;
 
 // Second break
-const SEC2 = 4940;
-const ADV2 = 792;
+const SEC2 = 4846;
+const ADV2 = 699;
 const PXL2 = PPS * ADV2;
 
 // Third break
-const SEC3 = 8901;
-const ADV3 = 1241;
+const SEC3 = 8784;
+const ADV3 = 491;
 const PXL3 = PPS * ADV3;
 
 // Fourth break
