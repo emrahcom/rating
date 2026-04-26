@@ -6,14 +6,14 @@
 //   deno run --allow-run --allow-read --allow-write graph-to-video.ts <GRAPH>
 // -----------------------------------------------------------------------------
 // Pixel coordinate of the starting point (minus 1) on X axis, e.g. 120
-const X0 = 163;
+const X0 = 134;
 // Pixels per second, e.g. 0.150
 // pixels_difference_of_two_points / time_in_sec
-const PPS = (1812 - 72) / (3 * 3600);
+const PPS = (1886 - 69) / (3 * 3600);
 // Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-const Y0 = 133;
+const Y0 = 66;
 // Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
-const Y1 = 916;
+const Y1 = 930;
 // Length of the video (MP4 file) in second, e.g. 9112
 const SECONDS = 8120;
 // Number of frames per second (default 0.5)
