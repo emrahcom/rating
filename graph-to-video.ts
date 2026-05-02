@@ -11,7 +11,7 @@ const X0 = 137;
 // pixels_difference_of_two_points / time_in_sec
 const PPS = (1724 - 81) / (3 * 3600);
 // Pixel coordinate of the top point of the slider on Y axis, e.g. 90
-const Y0 = 72;
+const Y0 = 106;
 // Pixel coordinate of the bottom point of the slider on Y axis, e.g. 1010
 const Y1 = 914;
 // Length of the video (MP4 file) in second, e.g. 9112
